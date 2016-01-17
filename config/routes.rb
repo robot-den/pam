@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'articles/index'
+
   devise_for :users
+
+  resources :articles, only: [:index]
+
   root to: "articles#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
