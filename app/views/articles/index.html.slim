@@ -8,6 +8,8 @@ table
       | Header
     td
       | Announce
+    td
+      | Read
   - @articles.each do |article|
     tr
       td
@@ -16,5 +18,5 @@ table
         =article.header
       td
         =article.announce
-
-  
+      td
+        =link_to "Show", article_path(article)
