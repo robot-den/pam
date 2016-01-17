@@ -1,4 +1,5 @@
 p Главная страница - все статьи (пока не реализована проверка администратором, но есть поле approved)
+p = link_to "Создать статью", new_article_path
 p Статьи:
 table
   tr
@@ -13,10 +14,10 @@ table
   - @articles.each do |article|
     tr
       td
-        =article.id
+        = article.id
       td
-        =article.header
+        = article.header
       td
-        =article.announce
+        = article.announce
       td
-        =link_to "Show", article_path(article)
+        = link_to "Show", article_path(article)

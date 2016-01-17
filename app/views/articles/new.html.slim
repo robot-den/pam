@@ -1,0 +1,18 @@
+|Here you can create a new Article! Enjoy!
+p
+= form_for @article do |article|
+  = article.label :header, "Заголовок"
+  br
+  = article.text_field :header
+  p
+  = article.label :announce, "Краткое описание"
+  br
+  = article.text_field :announce
+  p
+  = article.label :body, "Ваша статья"
+  br
+  = article.text_area  :body
+  p
+  = article.submit "Отправить на модерацию"
+p
+= link_to "К статьям", articles_path

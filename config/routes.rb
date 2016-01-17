@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'articles/index'
-
   devise_for :users
 
-  resources :articles, only: [:index, :show]
+  resources :articles, only: [:index, :show, :new, :create]
 
   root to: "articles#index"
 
