@@ -1,2 +1,20 @@
-h1 Articles#index
-p Find me in app/views/articles/index.html.slim
+p Главная страница - все статьи (пока не реализована проверка администратором, но есть поле approved)
+p Статьи:
+table
+  tr
+    td
+      | Id
+    td
+      | Header
+    td
+      | Announce
+  - @articles.each do |article|
+    tr
+      td
+        =article.id
+      td
+        =article.header
+      td
+        =article.announce
+
+  
