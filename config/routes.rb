@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users
-
-  resources :articles, only: [:index, :show, :new, :create]
+  #FIXME
+  resources :articles, only: [:index, :show, :new, :create, :destroy]
 
   root to: "articles#index"
 

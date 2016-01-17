@@ -11,6 +11,8 @@ table
       | Announce
     td
       | Read
+    td
+      | Delete
   - @articles.each do |article|
     tr
       td
@@ -21,3 +23,6 @@ table
         = article.announce
       td
         = link_to "Show", article_path(article)
+      /FIXME
+      td
+        = link_to "Delete", article_path(article), method: :delete
