@@ -8,4 +8,7 @@ class User < ActiveRecord::Base
           :trackable, 
           :validatable, 
           :omniauthable
+
+  has_many :articles
+
 end
