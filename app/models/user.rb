@@ -11,13 +11,14 @@ class User < ActiveRecord::Base
 
   has_many :articles
 
+  # Name/email devise auth
   attr_accessor :login
 
   validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
   #FIXME need change regular
   validates_format_of :name, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
-
+  # Overwrite devise's method for name/email login auth
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
