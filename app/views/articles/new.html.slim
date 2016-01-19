@@ -13,6 +13,12 @@ p
   br
   = article.text_area  :body
   p
+  /FIXME
+  = fields_for :category do |c|
+    - @categories.each do |category|
+      = c.label category.name
+      = c.check_box category.name, {}, true, false
+  p
   = article.submit "Отправить на модерацию"
 p
 = link_to "К статьям", articles_path

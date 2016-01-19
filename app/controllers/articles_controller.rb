@@ -14,17 +14,18 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @categories = Category.all
   end
 
   def create
     @article = Article.new(article_params)
-    #FIXME Is this normal? Uncomment when devise will work.
-    # @article.user_id = current_user.id
-    #FIXME delete it
-    @article.user_id = 1
+    #FIXME Is this normal?
+    @article.user_id = current_user.id
     if @article.save
+      @article.assign_categories(params.require(:category))
       redirect_to article_path(@article)
-    else
+    else      
+      @categories = Category.all
       render new_article_path
     end
   end
