@@ -21,7 +21,8 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     #FIXME Is this normal?
     @article.user_id = current_user.id
-    if @article.save
+    #FIXME
+    if params[:category] && @article.save
       @article.assign_categories(params.require(:category))
       redirect_to article_path(@article)
     else      
@@ -43,6 +44,7 @@ class ArticlesController < ApplicationController
   end
 
   private
+
     def article_params
       params.require(:article).permit(:header, :announce, :body)
     end
