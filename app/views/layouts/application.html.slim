@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    title Pam
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        /! Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" 
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand
+            - if user_signed_in?
+              | PeopleAround you, 
+              strong 
+                |#{current_user.name}
+              | !
+            - else
+              | PeopleAroundMe
+        /! Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a href="#"  Sport
+            li
+              a href="#"  Business
+            li
+              a href="#"  Policy
+            li.dropdown
+              a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                | or More
+                span.caret
+              ul.dropdown-menu
+                li
+                  a href="#"  Category 1
+                li
+                  a href="#"  Category 2
+                li
+                  a href="#"  Category 3
+                li.divider role="separator" 
+                li
+                  a href="#"  Random
+          form.navbar-form.navbar-left role="search" 
+            .form-group
+              input.form-control placeholder="Search" type="text" /
+            button.btn.btn-default type="submit"  Submit
+          ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              li
+                a href="#"  Profile
+              li
+                = link_to "Logout", destroy_user_session_path, method: :delete
+            - else
+              li
+                = link_to "Login", new_user_session_path
+              li
+                = link_to "Sign_up", new_user_registration_path
+
+        /! /.navbar-collapse
+      /! /.container-fluid
+    p class="notice" 
+    = notice
+    p class="alert"
+    = alert
+    
+    = yield

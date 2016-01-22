@@ -1,24 +1,26 @@
-|Here you can create a new Article! Enjoy!
+|Here you can create a new Article! Enjoy!!!
 p
-= form_for @article do |article|
-  = article.label :header, "Заголовок"
-  br
-  = article.text_field :header
-  p
-  = article.label :announce, "Краткое описание"
-  br
-  = article.text_field :announce
-  p
-  = article.label :body, "Ваша статья"
-  br
-  = article.text_area  :body
-  p
-  /FIXME
-  = fields_for :category do |c|
-    - @categories.each do |category|
-      = c.label category.name
-      = c.check_box category.name, {}, true, false
-  p
-  = article.submit "Отправить на модерацию"
-p
-= link_to "К статьям", articles_path
+.class="col-lg-12"
+  .class="col-lg-6"
+    = form_for @article do |article|
+      = article.label :header, "Заголовок"
+      br
+      = article.text_field :header, class: "form-control"
+      p
+      = article.label :announce, "Краткое описание"
+      br
+      = article.text_area :announce, class: "form-control"
+      p
+      = article.label :body, "Ваша статья"
+      br
+      = article.text_area  :body, class: "form-control"
+      p
+      /FIXME
+      = fields_for :category do |c|
+        - @categories.each do |category|
+          = c.label category.name
+          = c.check_box category.name, {}, true, false
+      p
+      = article.submit "Отправить на модерацию", class: "btn btn-primary"
+    p
+    = link_to "К статьям", articles_path
