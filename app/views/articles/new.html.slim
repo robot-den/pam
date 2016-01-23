@@ -1,7 +1,5 @@
-|Here you can create a new Article! Enjoy!!!
-p
-.class="col-lg-12"
-  .class="col-lg-6"
+.col-lg-12
+  .col-lg-6
     = form_for @article do |article|
       = article.label :header, "Заголовок"
       br
@@ -18,8 +16,8 @@ p
       /FIXME
       = fields_for :category do |c|
         - @categories.each do |category|
+          =' c.check_box category.name, {}, true, false
           = c.label category.name
-          = c.check_box category.name, {}, true, false
       p
       = article.submit "Отправить на модерацию", class: "btn btn-primary"
     p

@@ -1,28 +1,10 @@
-p Главная страница - все статьи (пока не реализована проверка администратором, но есть поле approved)
-p = link_to "Создать статью", new_article_path
-p Статьи:
-table
-  tr
-    td
-      | Id
-    td
-      | Header
-    td
-      | Announce
-    td
-      | Read
-    td
-      | Delete
-  - @articles.each do |article|
-    tr
-      td
-        = article.id
-      td
+- @articles.each do |article|
+  .col-lg-4
+    .panel.panel-default
+      .panel-heading
         = article.header
-      td
-        = article.announce
-      td
-        = link_to "Show", article_path(article)
-      /FIXME
-      td
-        = link_to "Delete", article_path(article), method: :delete
+      .panel-body
+        p
+          = article.announce
+        = link_to "Read", article_path(article), class: "btn btn-primary", style: "float: right;"
+  /! /.col-lg-4

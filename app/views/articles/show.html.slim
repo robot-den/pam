@@ -1,7 +1,12 @@
-| This is a page for read articles
-h2
-  strong
-    = @article.header
-= @article.body
-p
-  =link_to "Back", articles_path
+.col-lg-9
+  h3
+    strong
+      = @article.header
+  = @article.body
+.col-lg-3
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        | Веселый блок
+      .panel-body
+        | Привет! Я просто блок для чего угодно =)

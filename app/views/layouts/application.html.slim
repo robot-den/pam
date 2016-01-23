@@ -53,6 +53,8 @@ html
           ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               li
+                a href="/articles/new"  Создать статью
+              li
                 a href="#"  Profile
               li
                 = link_to "Logout", destroy_user_session_path, method: :delete
@@ -64,9 +66,10 @@ html
 
         /! /.navbar-collapse
       /! /.container-fluid
-    p class="notice" 
-    = notice
-    p class="alert"
-    = alert
+      /FIXME that div's make free area =(
+    / div class="notice" style=("hidden: true")
+    / = notice
+    / div class="alert"
+    / = alert
     
     = yield
