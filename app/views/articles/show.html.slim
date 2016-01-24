@@ -3,6 +3,35 @@
     strong
       = @article.header
   = @article.body
+  row
+    
+    p
+    .col-lg-5 style=("padding: 0px;")
+      - @comments.each do |comment|
+        .panel.panel-default
+          .panel-heading
+            = comment.owner_name
+          .panel-body
+            = comment.body
+      .panel.panel-default
+        .panel-heading
+          | Leave a comment!
+        .panel-body
+           = form_for @comment do |comment|
+            - unless user_signed_in?
+              = comment.label :owner_name, "Your name"
+              br
+              = comment.text_field :owner_name, class: "form-control"
+              p
+            = comment.label :body, "Your comment"
+            br
+            = comment.text_area :body, class: "form-control"
+            p
+            = comment.submit "Отправить", class: "btn btn-primary"
+            = comment.hidden_field :article_id, value: "#{@article.id}"
+            = comment.hidden_field :commentable_id, value: "#{@article.id}"
+            = comment.hidden_field :commentable_type, value: "Article"
+
 .col-lg-3
   .col-lg-12
     .panel.panel-default

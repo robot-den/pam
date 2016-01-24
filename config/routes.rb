@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "articles#index"
   #FIXME
   resources :articles, only: [:index, :show, :new, :create, :destroy]
+  resources :comments, only: [:create, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
