@@ -6,11 +6,14 @@
   row
     
     p
-    .col-lg-5 style=("padding: 0px;")
+    .col-lg-12 style=("padding: 0px;")
       - @comments.each do |comment|
-        .panel.panel-default
+        .panel.panel-default style=("margin-left: 10px; width: 500px;")
           .panel-heading
-            = comment.owner_name
+            strong
+              =' comment.owner_name
+            i
+              = "(#{comment.created_at.strftime("%H:%M %d.%m.%y")})"
           .panel-body
             = comment.body
       .panel.panel-default
