@@ -26,12 +26,11 @@ html
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li
-              a href="#"  Sport
-            li
-              a href="#"  Business
-            li
-              a href="#"  Policy
+            - take_categories.each do |category|
+              li
+                a href="/category/#{category.name}" =category.name
+
+            /no logic for it
             li.dropdown
               a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
                 | or More
@@ -43,9 +42,6 @@ html
                   a href="#"  Category 2
                 li
                   a href="#"  Category 3
-                li.divider role="separator" 
-                li
-                  a href="#"  Random
           form.navbar-form.navbar-left role="search" 
             .form-group
               input.form-control placeholder="Search" type="text" /

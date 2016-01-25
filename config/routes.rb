@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :articles, only: [:index, :show, :new, :create, :destroy]
   resources :comments, only: [:create, :destroy]
 
+  get 'category/:name', to: 'categories#show'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
