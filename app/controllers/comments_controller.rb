@@ -3,7 +3,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.commentable_type == 'Article' && Article.exists?(id: @comment.article_id) && @comment.commentable_id == @comment.article_id
-      @comment.owner_name = current_user.name if user_signed_in?
+      if user_signed_in?
+        @comment.owner_name = current_user.name 
+      else
+        @comment.owner_name += ' (unregistered)'
+      end
       if @comment.save
         redirect_to article_path(@comment.article_id)
       else
@@ -11,7 +15,11 @@ class CommentsController < ApplicationController
       end
     end
     if @comment.commentable_type == 'Comment' && Comment.exists?(id: @comment.commentable_id) && Comment.find(@comment.commentable_id).article_id == @comment.article_id
-      @comment.owner_name = current_user.name if user_signed_in?
+      if user_signed_in?
+        @comment.owner_name = current_user.name 
+      else
+        @comment.owner_name += ' (unregistered)'
+      end
       if @comment.save
         redirect_to article_path(@comment.article_id)
       else

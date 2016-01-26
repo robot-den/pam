@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   def index
     #FIXME - need only approved articles
-    @articles = Article.all
+    @articles = Article.where(approved: true)
   end
 
   def show
