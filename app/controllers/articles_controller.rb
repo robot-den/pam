@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
 
   def index
     #FIXME - need only approved articles
-    @articles = Article.where(approved: true)
+    @articles = Article.where(approved: true).order('created_at DESC')
   end
 
   def show
