@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    #FIXME - need only approved articles
-    @articles = Article.where(approved: true).order('created_at DESC')
+    @articles = Article.where(approved: true).order('created_at DESC').page(params[:page]).per(6)
   end
 
   def show
