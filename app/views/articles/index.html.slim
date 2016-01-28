@@ -1,10 +1,17 @@
-- @articles.each do |article|
-  .col-lg-4
-    .panel.panel-default
-      .panel-heading
-        = article.header
-      .panel-body
-        p
-          = article.announce
-        = link_to "Read", article_path(article), class: "btn btn-primary", style: "float: right;"
-  /! /.col-lg-4
+
+.row
+  .col-lg-12
+    - @articles.each do |article|
+      .col-lg-8
+        .panel.panel-default
+          .panel-heading
+            = article.header
+          .panel-body
+            p
+              = article.announce
+            = link_to "Read", article_path(article), class: "btn btn-primary", style: "float: right;"
+      /! /.col-lg-4
+.row
+  .col-lg-8
+    center
+      = paginate @articles
