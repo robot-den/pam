@@ -7,9 +7,13 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comment = Comment.new
-    @article = Article.find(params[:id])
-    @comments = take_sort_comments(@article)
+    if params[:id] && Article.exists?(params[:id])
+      @comment = Comment.new
+      @article = Article.find(params[:id])
+      @comments = take_sort_comments(@article)
+    else
+      redirect_to articles_path
+    end
   end
 
   def new

@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
   # name/email devise auth
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def authenticate_admin_user!
+    if user_signed_in?
+      redirect_to new_user_session_path unless current_user.admin == true
+    else
+      redirect_to articles_path
+    end
+  end
+
   protected
 
   # name/email devise auth
