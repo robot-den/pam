@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @articles = Article.where(approved: true).order('created_at DESC').page(params[:page]).per(6)
+    @articles = Article.where(approved: true).order('created_at DESC').page_kaminari(params[:page])
   end
 
   def show
