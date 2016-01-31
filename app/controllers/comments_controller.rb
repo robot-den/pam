@@ -28,8 +28,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @comment.update(body: "Комментарий удален")
+    redirect_to :back
+  end
+
   def destroy
-    
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to :back  
   end
 
   private

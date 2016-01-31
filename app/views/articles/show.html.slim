@@ -15,7 +15,12 @@
             i
               = "(#{comment.created_at.strftime("%H:%M %d.%m.%y")})"
           .panel-body
-            = comment.body
+            =' comment.body
+            - if current_user.try(:admin?)
+              br
+              =' link_to "Удалить текст комментария", comment_path(comment), method: :put
+              br
+              = link_to "Удалить полностью (вместе с веткой)", comment_path(comment), method: :delete
       .panel.panel-default
         .panel-heading
           | Leave a comment!

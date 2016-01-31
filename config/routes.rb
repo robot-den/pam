@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
+  
   devise_for :users
   
   root to: "articles#index"
   #FIXME
   resources :articles, only: [:index, :show, :new, :create, :destroy]
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create, :update, :destroy]
 
   get 'category/:name', to: 'categories#show'
 
