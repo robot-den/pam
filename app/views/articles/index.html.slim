@@ -10,7 +10,7 @@
             p
               = article.announce
             = link_to "Read", article_path(article), class: "btn btn-primary", style: "float: right;"
-            - if current_user.admin
+            - if current_user.try(:admin?)
               /FIXME Why "confirm:" dont work?
               = link_to "Удалить", article_path(article), method: :delete, class: "btn btn-danger", style: "float: left;", "data-confirm" => "Вы уверенены?"
       /! /.col-lg-4

@@ -42,8 +42,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    @article.destroy!
+    if current_user.try(:admin?)
+      @article = Article.find(params[:id])
+      @article.destroy!
+    end
     redirect_to articles_path
   end
 
