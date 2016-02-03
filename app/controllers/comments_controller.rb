@@ -28,8 +28,20 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    if current_user.try(:admin?)
+      @comment = Comment.find(params[:id])
+      @comment.update(body: "Комментарий удален")
+    end
+    redirect_to :back
+  end
+
   def destroy
-    
+    if current_user.try(:admin?)
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+    end
+    redirect_to :back  
   end
 
   private

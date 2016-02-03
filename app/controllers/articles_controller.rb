@@ -3,13 +3,17 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @articles = Article.where(approved: true).order('created_at DESC').page(params[:page]).per(6)
+    @articles = Article.where(approved: true).order('created_at DESC').page_kaminari(params[:page])
   end
 
   def show
-    @comment = Comment.new
-    @article = Article.find(params[:id])
-    @comments = take_sort_comments(@article)
+    if params[:id] && Article.exists?(params[:id])
+      @comment = Comment.new
+      @article = Article.find(params[:id])
+      @comments = take_sort_comments(@article)
+    else
+      redirect_to articles_path
+    end
   end
 
   def new
@@ -38,8 +42,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    @article.destroy!
+    if current_user.try(:admin?)
+      @article = Article.find(params[:id])
+      @article.destroy!
+    end
     redirect_to articles_path
   end
 
