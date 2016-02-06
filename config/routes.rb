@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   devise_for :users
   
   root to: "articles#index"
+  
+  #FIXME
+  resources :comments
   #FIXME
   resources :articles, only: [:index, :show, :new, :create, :destroy]
-  resources :comments, only: [:create, :update, :destroy]
+  # resources :comments, only: [:create, :update, :destroy]
 
   get 'category/:name', to: 'categories#show'
 

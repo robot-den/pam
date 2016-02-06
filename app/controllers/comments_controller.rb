@@ -1,53 +1,46 @@
 class CommentsController < ApplicationController
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.commentable_type == 'Article' && Article.exists?(id: @comment.article_id) && @comment.commentable_id == @comment.article_id
-      if user_signed_in?
-        @comment.owner_name = current_user.name 
-      else
-        @comment.owner_name += ' (unregistered)'
-      end
-      if @comment.save
-        redirect_to article_path(@comment.article_id)
-      else
-        redirect_to article_path(@comment.article_id)
-      end
-    end
-    if @comment.commentable_type == 'Comment' && Comment.exists?(id: @comment.commentable_id) && Comment.find(@comment.commentable_id).article_id == @comment.article_id
-      if user_signed_in?
-        @comment.owner_name = current_user.name 
-      else
-        @comment.owner_name += ' (unregistered)'
-      end
-      if @comment.save
-        redirect_to article_path(@comment.article_id)
-      else
-        redirect_to article_path(@comment.article_id)
-      end
-    end
-  end
+    commentable = commentable_type.constantize.find(commentable_id)
+    @comment = Comment.build_from(commentable, current_user.id, body)
 
-  def update
-    if current_user.try(:admin?)
-      @comment = Comment.find(params[:id])
-      @comment.update(body: "Комментарий удален")
+    respond_to do |format|
+      if @comment.save
+        make_child_comment
+        format.html  { redirect_to(:back, :notice => 'Comment was successfully added.') }
+      else
+        format.html  { render :action => "new" }
+      end
     end
-    redirect_to :back
-  end
-
-  def destroy
-    if current_user.try(:admin?)
-      @comment = Comment.find(params[:id])
-      @comment.destroy
-    end
-    redirect_to :back  
   end
 
   private
 
-    def comment_params
-      params.require(:comment).permit(:article_id, :owner_name, :body, :commentable_type, :commentable_id)
-    end
+  def comment_params
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :comment_id)
+  end
 
+  def commentable_type
+    comment_params[:commentable_type]
+  end
+
+  def commentable_id
+    comment_params[:commentable_id]
+  end
+
+  def comment_id
+    comment_params[:comment_id]
+  end
+
+  def body
+    comment_params[:body]
+  end
+
+  def make_child_comment
+    return "" if comment_id.blank?
+
+    parent_comment = Comment.find comment_id
+    @comment.move_to_child_of(parent_comment)
+  end
+  
 end

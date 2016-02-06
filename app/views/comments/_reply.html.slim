@@ -1,0 +1,19 @@
+- comments.each do |comment|
+  .comments-show
+    .comment
+      p
+        = comment.body
+        br
+      .comment-nav
+        a.comment-reply href="#" Reply
+      .reply-form
+        = form_for @new_comment do |f|
+          = f.hidden_field :commentable_id, value: @new_comment.commentable_id
+          = f.hidden_field :commentable_type, value: @new_comment.commentable_type
+          = f.hidden_field :comment_id, value: comment.id
+          .field.form-group
+            = f.text_area :body, class: 'form-control'
+          .field.form-group
+            /FIXME why sub,it_tag?
+            = submit_tag "Post Reply", class: 'btn btn-primary'
+    = render partial: "comments/reply", locals: {comments: comment.children}
