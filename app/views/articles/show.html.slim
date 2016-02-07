@@ -2,7 +2,7 @@
   h3
     strong
       = @article.header
-  = @article.body
+  = sanitize(@article.body)
   hr
   = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
 .col-lg-3
