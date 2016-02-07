@@ -32,12 +32,21 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'slim-rails'
+#Auth
 gem 'devise'
 gem 'omniauth'
+#Style
 gem 'bootstrap-sass'
+#Pagination
 gem 'kaminari'
+#Admin panel
 gem 'activeadmin', github: 'activeadmin'
+#Comments
 gem 'acts_as_commentable_with_threading'
+#Gems for redactor
+gem 'redactor-rails'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

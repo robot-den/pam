@@ -20,6 +20,11 @@ module Pam
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    #Tags for sanitizer (all from sanitizer.rb plus 'iframe' (its need for video))
+    config.action_view.sanitized_allowed_tags = %w(strong em b i p code pre tt samp kbd var sub
+      sup dfn cite big small address hr br div span h1 h2 h3 h4 h5 h6 ul ol li dl dt dd abbr
+      acronym a img blockquote del ins iframe)
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
