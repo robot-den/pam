@@ -11,10 +11,10 @@
  * file per style scope.
  *
  *= require_self
+ *= require redactor-rails
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "redactor-rails.css";
 
 /* FIXME replace*/
 .comments-header {
