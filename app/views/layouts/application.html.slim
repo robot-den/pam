@@ -28,7 +28,7 @@ html
           ul.nav.navbar-nav
             - take_categories.each do |category|
               li
-                a href="/category/#{category.name}" =category.name
+                a href="/category/#{category.name}" =category.name.capitalize
 
             /no logic for it
             li.dropdown

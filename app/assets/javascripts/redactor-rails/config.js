@@ -9,7 +9,7 @@ window.init_redactor = function(){
         // You can specify, which ones plugins you need.
         // If you want to use plugins, you have add plugins to your
         // application.js and application.css files and uncomment the line below:
-        // "plugins": ['fontsize', 'fontcolor', 'fontfamily', 'fullscreen', 'textdirection', 'clips'],
+        "plugins": ['video'],
         "imageUpload":"/redactor_rails/pictures?" + params,
         "imageGetJson":"/redactor_rails/pictures",
         "fileUpload":"/redactor_rails/documents?" + params,
