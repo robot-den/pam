@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     commentable = commentable_type.constantize.find(commentable_id)
-    @comment = Comment.build_from(commentable, current_user.id, body)
+    @comment = Comment.build_from(commentable, commenter_id, body, commenter_name)
 
     respond_to do |format|
       if @comment.save
@@ -16,8 +16,18 @@ class CommentsController < ApplicationController
 
   private
 
+  def commenter_name
+    if user_signed_in?
+      current_user.name
+    elsif comment_params[:subject]
+      comment_params[:subject] + " (unregistered)"
+    else
+      "Unregistered"
+    end
+  end
+
   def comment_params
-    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :comment_id)
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :comment_id, :subject)
   end
 
   def commentable_type

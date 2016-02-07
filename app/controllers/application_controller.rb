@@ -13,6 +13,16 @@ class ApplicationController < ActionController::Base
       redirect_to articles_path
     end
   end
+  
+  #FIXME read about methods in ruby and remake it
+  def commenter_id
+    if user_signed_in?
+      current_user.id
+    else
+      0
+    end
+  end
+  
 
   protected
 

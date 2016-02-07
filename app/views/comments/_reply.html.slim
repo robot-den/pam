@@ -2,6 +2,11 @@
   .comments-show
     .comment
       p
+        strong
+          =' comment.subject
+        i
+          = comment.created_at.strftime("(at %I:%M %m/%d/%y)")
+        br
         = comment.body
         br
       .comment-nav
@@ -11,6 +16,9 @@
           = f.hidden_field :commentable_id, value: @new_comment.commentable_id
           = f.hidden_field :commentable_type, value: @new_comment.commentable_type
           = f.hidden_field :comment_id, value: comment.id
+          - unless user_signed_in?    
+            .field.form-group
+              = f.text_field :subject, class: 'form-control'
           .field.form-group
             = f.text_area :body, class: 'form-control'
           .field.form-group

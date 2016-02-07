@@ -18,15 +18,15 @@ end
     article.categories << Category.find_by_name(category)
   end
 end
-#create registered users comments for articles
-30.times do |i|
-  article = Article.find(rand(1..15))
-  comment = Comment.create(article_id: article.id, owner_name: name.sample, body: "I like it ! I read this article #{i+1} times!!")
-  article.comments << comment  
-end
-#create unregistered users comments for random comments
-30.times do |i|
-  batya_comment = Comment.find(rand(1..Comment.count))
-  new_comment = Comment.create(article_id: batya_comment.article_id, owner_name: "#{i+1} (unregistered)", body: "Nice article! I'll be back here #{i+1} times!")
-  batya_comment.comments << new_comment  
-end
+# #create registered users comments for articles
+# 30.times do |i|
+#   article = Article.find(rand(1..15))
+#   comment = Comment.create(article_id: article.id, owner_name: name.sample, body: "I like it ! I read this article #{i+1} times!!")
+#   article.comments << comment  
+# end
+# #create unregistered users comments for random comments
+# 30.times do |i|
+#   batya_comment = Comment.find(rand(1..Comment.count))
+#   new_comment = Comment.create(article_id: batya_comment.article_id, owner_name: "#{i+1} (unregistered)", body: "Nice article! I'll be back here #{i+1} times!")
+#   batya_comment.comments << new_comment  
+# end

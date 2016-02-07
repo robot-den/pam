@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     if params[:id] && Article.exists?(params[:id])
       @article = Article.find(params[:id])
       #FIXME current_user
-      @new_comment = Comment.build_from(@article, current_user.id, "")
+      @new_comment = Comment.build_from(@article, commenter_id, "", "")
     else
       redirect_to articles_path
     end

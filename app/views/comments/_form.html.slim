@@ -1,6 +1,9 @@
 = form_for @new_comment do |f|
   = f.hidden_field :commentable_id, value: @new_comment.commentable_id
   = f.hidden_field :commentable_type, value: @new_comment.commentable_type
+  - unless user_signed_in?    
+    .field.form-group
+      = f.text_field :subject, class: 'form-control'
   .field.form-group
     = f.text_area :body, class: 'form-control'
   .field.form-group
