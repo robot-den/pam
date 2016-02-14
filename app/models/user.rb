@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
           :rememberable, 
           :trackable, 
           :validatable, 
-          :omniauthable
+          :omniauthable,
+          :async
 
   has_many :articles
   has_and_belongs_to_many :categories
