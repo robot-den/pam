@@ -1,0 +1,16 @@
+.col-lg-12
+  .panel.panel-default
+    .panel-heading
+      | Categories of this article:
+    .panel-body
+      - unless @sub_categories.empty?
+        - @sub_categories.each do |category|
+          =' category.name.capitalize
+          a href="/subscribe_category/#{category.name}" Subscribe
+          br
+      hr
+      - unless @unsub_categories.empty?
+        - @unsub_categories.each do |category|
+          =' category.name.capitalize
+          a href="/subscribe_category/#{category.name}" Unsubscribe
+          br

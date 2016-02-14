@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
   def show
     if params[:id] && Article.exists?(params[:id])
       @article = Article.find(params[:id])
+      @sub_categories, @unsub_categories = Category.user_categories(@article, current_user)
       #FIXME current_user
       @new_comment = Comment.build_from(@article, commenter_id, "", "")
     else
