@@ -6,5 +6,6 @@
   hr
   = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
 .col-lg-3
-  = render 'subscription'
+  - if user_signed_in?
+    = render 'subscription'
 
