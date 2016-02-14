@@ -12,4 +12,5 @@ html
     =@article.announce
     = link_to 'Read', article_url(@article) 
     hr
-    | Вы можете отписаться от рассылки статей данной категории
+    | Вы можете полностью отписаться от рассылки нажав
+    = link_to "Здесь", unsubscribe_url(@user.access_token)

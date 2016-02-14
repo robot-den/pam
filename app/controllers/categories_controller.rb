@@ -18,6 +18,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def unsubscribe
+    if user = User.read_access_token(params[:signature])
+      user.categories.clear
+      render text: "You have been unsubscribed"
+    else
+      render text: "Invalid Link"
+    end
+  end
+
   private
 
   def take_category

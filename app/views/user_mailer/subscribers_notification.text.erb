@@ -5,3 +5,4 @@ Read a new article:
 <%= @article.header %>
 <%= @article.announce %>
 <%= link_to 'Read', article_url(@article)  %>
+Вы также можете полностью отписаться от рассылки нажав <%= link_to "Здесь", unsubscribe_url(@user.access_token)  %>
