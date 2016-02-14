@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+  body
+    h1
+      = "Hi #{@user.name}!"
+    = "Your article: #{@article.header}, "
+    - if @article.approved
+      |has been approved!
+      br
+      = link_to 'Read', article_url(@article) 
+    - else 
+      |was rejected :(

@@ -36,6 +36,9 @@ html
                 | or More
                 span.caret
               ul.dropdown-menu
+                - if current_user.try(:admin?)
+                  li
+                    a href="/admin"  Админка
                 li
                   a href="#"  Category 1
                 li

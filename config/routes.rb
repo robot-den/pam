@@ -13,7 +13,14 @@ Rails.application.routes.draw do
   resources :articles, only: [:index, :show, :new, :create, :destroy]
   # resources :comments, only: [:create, :update, :destroy]
 
+  # show articles of category
   get 'category/:name', to: 'categories#show'
+
+  get 'subscribe_category/:name', to: 'categories#subscribe'
+
+  get '/unsubscribe/:signature' => 'categories#unsubscribe', as: 'unsubscribe'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

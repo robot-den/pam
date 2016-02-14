@@ -6,10 +6,6 @@
   hr
   = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
 .col-lg-3
-  .col-lg-12
-    .panel.panel-default
-      .panel-heading
-        | Веселый блок
-      .panel-body
-        | Привет! Я просто блок для чего угодно =)
+  - if user_signed_in?
+    = render 'subscription'
 

@@ -7,9 +7,11 @@ class User < ActiveRecord::Base
           :rememberable, 
           :trackable, 
           :validatable, 
-          :omniauthable
+          :omniauthable,
+          :async
 
   has_many :articles
+  has_and_belongs_to_many :categories
 
   # Name/email devise auth
   attr_accessor :login
@@ -28,5 +30,30 @@ class User < ActiveRecord::Base
       where(conditions.to_hash).first
     end
   end
+
+#FIXME methods for unsubscribe link
+  # Access token for a user
+  def access_token
+    User.create_access_token(self)
+  end
+
+  # Verifier based on our application secret
+  def self.verifier
+    ActiveSupport::MessageVerifier.new(Rails.application.secrets[:secret_key_base])
+  end
+
+  # Get a user from a token
+  def self.read_access_token(signature)
+    id = verifier.verify(signature)
+    User.find_by_id id
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
+  end
+
+  # Class method for token generation
+  def self.create_access_token(user)
+    verifier.generate(user.id)
+  end
+
 
 end
