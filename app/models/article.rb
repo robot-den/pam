@@ -8,6 +8,7 @@ class Article < ActiveRecord::Base
   validates :user, :header, :announce, :body, presence: true
 
   after_update :status_notification
+  after_update :subscribers_notification
   
   #FIXME(logic and place)
   #Assign to Article categories that user checked
@@ -21,8 +22,18 @@ class Article < ActiveRecord::Base
 
   private
 
+  def subscribers_notification
+    if self.approved?
+      self.categories.each do |category|
+        category.subscribers.each do |user|
+          UserMailer.subscribers_notification(self, user).deliver_later
+        end
+      end
+    end
+  end
+
   def status_notification
-    UserMailer.status_notification_article(self).deliver_later unless self.approved.nil?
+    UserMailer.status_article_notification(self).deliver_later unless self.approved.nil?
   end
 
 end

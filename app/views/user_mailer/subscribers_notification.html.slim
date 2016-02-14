@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+  body
+    h1
+      = "Hi #{@user.name}!"
+    br
+    | Read a new article:
+    h3
+      = @article.header
+    =@article.announce
+    = link_to 'Read', article_url(@article) 
+    hr
+    | Вы можете отписаться от рассылки статей данной категории

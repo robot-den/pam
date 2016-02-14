@@ -8,5 +8,7 @@ html
     = "Your article: #{@article.header}, "
     - if @article.approved
       |has been approved!
+      br
+      = link_to 'Read', article_url(@article) 
     - else 
       |was rejected :(
