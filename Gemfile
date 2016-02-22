@@ -35,6 +35,7 @@ gem 'slim-rails'
 #Auth
 gem 'devise'
 gem 'omniauth'
+gem 'omniauth-facebook'
 #Style
 gem 'bootstrap-sass'
 #Pagination

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
   ActiveAdmin.routes(self)
   
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   
   root to: "articles#index"
   
