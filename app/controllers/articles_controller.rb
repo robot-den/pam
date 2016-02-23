@@ -11,11 +11,25 @@ class ArticlesController < ApplicationController
     if params[:id] && Article.exists?(params[:id])
       @article = Article.find(params[:id])
       @sub_categories, @unsub_categories = Category.user_categories(@article, current_user) if user_signed_in?
-      #FIXME current_user
+      #FIXME current_user and default values
       @new_comment = Comment.build_from(@article, commenter_id, "", "")
     else
       redirect_to articles_path
     end
+  end
+
+  def search
+    @articles = Article.search(params[:search], with: {approved: true}, page: params[:page], per_page: 6)
+    render 'index'
+
+    # if @article.nil?
+    #   render
+    # elsif @articles.empty?
+    #   render
+    # else
+    #   render
+    # end
+
   end
 
   def new

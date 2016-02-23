@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   #FIXME
   resources :comments
   #FIXME
+  get 'articles/search', to: 'articles#search'
   resources :articles, only: [:index, :show, :new, :create, :destroy]
+
   # resources :comments, only: [:create, :update, :destroy]
 
   # show articles of category

@@ -13,4 +13,5 @@
 /tmp
 /public/system
 /public/uploads
+/db/sphinx
 /*.rdb
