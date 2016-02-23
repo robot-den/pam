@@ -19,17 +19,17 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = Article.search(params[:search], with: {approved: true}, page: params[:page], per_page: 6)
-    render 'index'
-
-    # if @article.nil?
-    #   render
-    # elsif @articles.empty?
-    #   render
-    # else
-    #   render
-    # end
-
+    if params[:search].nil? || params[:search].empty?
+      redirect_to root_path
+    else
+      @articles = Article.search(
+        params[:search], 
+        with: {approved: true}, 
+        page: params[:page], 
+        per_page: 6)
+      @articles.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
+      render 'search'
+    end
   end
 
   def new
