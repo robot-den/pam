@@ -11,10 +11,24 @@ class ArticlesController < ApplicationController
     if params[:id] && Article.exists?(params[:id])
       @article = Article.find(params[:id])
       @sub_categories, @unsub_categories = Category.user_categories(@article, current_user) if user_signed_in?
-      #FIXME current_user
+      #FIXME current_user and default values
       @new_comment = Comment.build_from(@article, commenter_id, "", "")
     else
       redirect_to articles_path
+    end
+  end
+
+  def search
+    if params[:search].nil? || params[:search].empty?
+      redirect_to root_path
+    else
+      @articles = Article.search(
+        params[:search], 
+        with: {approved: true}, 
+        page: params[:page], 
+        per_page: 6)
+      @articles.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
+      render 'search'
     end
   end
 
