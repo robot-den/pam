@@ -32,28 +32,30 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'slim-rails'
-#Auth
+# Auth
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
-#Style
+# Style
 gem 'bootstrap-sass'
-#Pagination
+# Pagination
 gem 'kaminari'
-#Admin panel
+# Admin panel
 gem 'activeadmin', github: 'activeadmin'
-#Comments
+# Comments
 gem 'acts_as_commentable_with_threading'
-#Gems for redactor
+# Gems for redactor
 gem 'redactor-rails'
 gem 'carrierwave'
 gem 'mini_magick'
-#Async mail
+# Async mail
 gem 'sidekiq'
 gem 'devise-async'
-#Sphinx
+# Sphinx
 gem 'mysql2',          '~> 0.3.13'
 gem 'thinking-sphinx', '~> 3.1.0'
+# Tagging
+gem 'acts-as-taggable-on', '~> 3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -3,6 +3,9 @@
     strong
       = sanitize(@article.header)
   = sanitize(@article.body)
+  hr 
+  = render 'tag_list'
+
   hr
   = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
 .col-lg-3

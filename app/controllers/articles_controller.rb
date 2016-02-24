@@ -18,6 +18,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def show_by_tag
+    @articles = Article.tagged_with(params[:tag]).page_kaminari(params[:page])
+    render 'index'
+  end
+
   def search
     if params[:search].nil? || params[:search].empty?
       redirect_to root_path
@@ -68,6 +73,6 @@ class ArticlesController < ApplicationController
   private
 
     def article_params
-      params.require(:article).permit(:header, :announce, :body)
+      params.require(:article).permit(:header, :announce, :body, :tag_list)
     end
 end

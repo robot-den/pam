@@ -9,6 +9,10 @@
       br
       = article.text_area :announce, class: "form-control"
       p
+      = article.label :tag_list, "Теги (разделенные запятой)"
+      br
+      = article.text_field :tag_list, class: "form-control"
+      p
       = article.label :body, "Ваша статья"
       br
       = article.text_area  :body, class: "form-control extended-redactor"

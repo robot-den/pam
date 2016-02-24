@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   #FIXME
   resources :comments
   #FIXME
+  get 'tag/:tag', to: 'articles#show_by_tag', as: :tag
+  
   get 'articles/search', to: 'articles#search'
   resources :articles, only: [:index, :show, :new, :create, :destroy]
 

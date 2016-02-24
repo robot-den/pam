@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   has_and_belongs_to_many :categories
 
   acts_as_commentable
+  acts_as_taggable
 
   validates :user, :header, :announce, :body, presence: true
 
