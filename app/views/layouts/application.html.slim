@@ -47,8 +47,12 @@ html
                   a href="#"  Category 3
           .navbar-form.navbar-left role="search" 
             .form-group
-              = form_tag({controller: "articles", action: "search"}, method: "get")
-                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search: words, tags...', type: 'text'
+              = form_tag('/articles/search', method: "get")
+                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
+                = radio_button_tag :search_by, 'words', true
+                =' label_tag :search_by_words, 'by words'
+                = radio_button_tag :search_by, 'tags'
+                = label_tag :search_by_tags, 'by tags'
                 = submit_tag "Search", :name => nil, class: 'btn btn-default'
           ul.nav.navbar-nav.navbar-right
             - if user_signed_in?

@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:search, :index, :show, :show_by_tag]
 
 
   def index
@@ -17,16 +17,18 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     end
   end
-
+  #FIXME move it to index method
   def show_by_tag
     @articles = Article.tagged_with(params[:tag]).page_kaminari(params[:page])
     render 'index'
   end
 
   def search
-    if params[:search].nil? || params[:search].empty?
-      redirect_to root_path
-    else
+    redirect_to root_path if params[:search].nil? || params[:search].empty?
+    if params[:search_by] == 'tags'
+      @articles = Article.tagged_with(params[:search]).page_kaminari(params[:page])
+      render 'index'
+    elsif params[:search_by] == 'words'
       @articles = Article.search(
         params[:search], 
         with: {approved: true}, 
@@ -34,6 +36,8 @@ class ArticlesController < ApplicationController
         per_page: 6)
       @articles.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
       render 'search'
+    else
+      redirect_to root_path
     end
   end
 
