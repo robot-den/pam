@@ -33,7 +33,7 @@ html
             /no logic for it
             li.dropdown
               a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                | or More
+                | or more
                 span.caret
               ul.dropdown-menu
                 - if current_user.try(:admin?)
@@ -45,15 +45,8 @@ html
                   a href="#"  Category 2
                 li
                   a href="#"  Category 3
-          .navbar-form.navbar-left role="search" 
-            .form-group
-              = form_tag('/articles/search', method: "get")
-                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
-                = radio_button_tag :search_by, 'words', true
-                =' label_tag :search_by_words, 'by words'
-                = radio_button_tag :search_by, 'tags'
-                = label_tag :search_by_tags, 'by tags'
-                = submit_tag "Search", :name => nil, class: 'btn btn-default'
+            li
+              a#toggle-search-block href="" or search
           ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               li
@@ -68,6 +61,18 @@ html
               li
                 = link_to "Sign_up", new_user_registration_path
 
+        /! Brand and toggle get grouped for better mobile display
+      .container-fluid#search-block
+        .navbar-header
+          .navbar-form.navbar-left role="search" 
+            .form-group
+              = form_tag('/articles/search', method: "get")
+                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
+                = radio_button_tag :search_by, 'words', true
+                =' label_tag :search_by_words, 'by words'
+                = radio_button_tag :search_by, 'tags'
+                = label_tag :search_by_tags, 'by tags'
+                = submit_tag "Search", :name => nil, class: 'btn btn-default'
         /! /.navbar-collapse
       /! /.container-fluid
       /FIXME that div's make free area =(

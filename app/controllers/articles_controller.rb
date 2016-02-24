@@ -24,8 +24,9 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    redirect_to root_path if params[:search].nil? || params[:search].empty?
-    if params[:search_by] == 'tags'
+    if params[:search].nil? || params[:search].empty?
+      redirect_to root_path
+    elsif params[:search_by] == 'tags'
       @articles = Article.tagged_with(params[:search]).page_kaminari(params[:page])
       render 'index'
     elsif params[:search_by] == 'words'

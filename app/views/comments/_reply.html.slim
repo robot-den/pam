@@ -1,16 +1,17 @@
 - comments.each do |comment|
-  .comments-show
-    .comment
-      p
-        strong
+  ul.post-comments.comments-show
+    li.comment
+      .comment-wrapper
+        .comment-author
           =' comment.subject
-        i
-          = comment.created_at.strftime("(at %I:%M %m/%d/%y)")
-        br
-        = comment.body
-        br
-      .comment-nav
-        a.comment-reply href="#" Reply
+        p
+          = comment.body
+        .comment-actions
+          span.comment-date
+            = comment.updated_at.strftime("%B %eth , %Y %I:%M")
+          a.comment-reply.btn.btn-micro.btn-grey.comment-reply-btn href=""
+            i.glyphicon.glyphicon-share-alt
+            |  Reply
       .reply-form
         = form_for @new_comment do |f|
           = f.hidden_field :commentable_id, value: @new_comment.commentable_id
@@ -18,8 +19,10 @@
           = f.hidden_field :comment_id, value: comment.id
           - unless user_signed_in?    
             .field.form-group
+              = f.label :subject, "Your name"
               = f.text_field :subject, class: 'form-control'
           .field.form-group
+            = f.label :body, "Your comment"
             = f.text_area :body, class: 'form-control'
           .field.form-group
             /FIXME why sub,it_tag?
