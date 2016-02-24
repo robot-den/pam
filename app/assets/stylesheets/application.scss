@@ -242,18 +242,18 @@ body {
   border-top: 1px dotted #828282;
   padding-top: 5px;
 }
-// .blog-sidebar h4 {
-//   margin-top: 20px;
-//   font-weight: 700;
-// }
-// .blog-sidebar h4:first-child {
-//   margin-top: 0;
-// }
-// .blog-sidebar ul {
-//   list-style-type: none;
-//   margin-left: 0;
-//   padding: 0;
-// }
+.blog-sidebar h4 {
+  margin-top: 20px;
+  font-weight: 700;
+}
+.blog-sidebar h4:first-child {
+  margin-top: 20px;
+}
+.blog-sidebar ul {
+  list-style-type: none;
+  margin-left: 0;
+  padding: 0;
+}
 // .blog-sidebar .recent-posts li,
 // .blog-sidebar .blog-categories li {
 //   padding: 5px 20px 5px 0;
