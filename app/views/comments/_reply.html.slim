@@ -1,5 +1,5 @@
-- comments.each do |comment|
-  ul.post-comments.comments-show
+ul.post-comments.comments-show
+  - comments.each do |comment|
     li.comment
       .comment-wrapper
         .comment-author
@@ -7,6 +7,11 @@
         p
           = comment.body
         .comment-actions
+          - if current_user.try(:admin?)
+            span.admin-links
+              | Удалить: 
+              =' link_to 'текст комментария', comment, method: :put, "data-confirm" => "Будет заменен текст комментария. Удаляем ?", remote: true
+              =' link_to 'всю ветку', comment, method: :delete, "data-confirm" => "Этот комментарий и все дерево дочерних комментариев будут удалены. Удаляем ?", remote: true
           span.comment-date
             = comment.updated_at.strftime("%B %eth , %Y %I:%M")
           a.comment-reply.btn.btn-micro.btn-grey.comment-reply-btn href=""

@@ -68,14 +68,17 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    if current_user.try(:admin?)
+      @article = Article.find(params[:id])
+      @article.update_attributes(approved: false)
+    end
+    respond_to do |format|
+      format.html { redirect_to articles_path }
+      format.js
+    end
   end
 
   def destroy
-    if current_user.try(:admin?)
-      @article = Article.find(params[:id])
-      @article.destroy!
-    end
-    redirect_to articles_path
   end
 
   private
