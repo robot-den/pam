@@ -17,3 +17,11 @@
 //= require redactor-rails
 //= require redactor-rails/plugins
 //= require_tree .
+
+$(document).on('ready page:load', function () {
+  var searchBlock = $('#search-block');
+  $(document).on('click', '#toggle-search-block', function () {
+    searchBlock.slideToggle();
+    return false;
+  });
+});

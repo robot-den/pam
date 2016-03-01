@@ -24,8 +24,9 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    redirect_to root_path if params[:search].nil? || params[:search].empty?
-    if params[:search_by] == 'tags'
+    if params[:search].nil? || params[:search].empty?
+      redirect_to root_path
+    elsif params[:search_by] == 'tags'
       @articles = Article.tagged_with(params[:search]).page_kaminari(params[:page])
       render 'index'
     elsif params[:search_by] == 'words'
@@ -51,11 +52,14 @@ class ArticlesController < ApplicationController
     #FIXME Is this normal?
     @article.user_id = current_user.id
     #FIXME
-    if params[:category] && @article.save
+    if params[:preview]
+      render 'preview'
+    elsif params[:category] && @article.save
       @article.assign_categories(params.require(:category))
       redirect_to article_path(@article)
     else      
       @categories = Category.all
+      #FIXME
       render new_article_path
     end
   end

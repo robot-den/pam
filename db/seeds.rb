@@ -6,7 +6,7 @@ end
 #create user with admin privilege
 User.create(name: "admin", email: "admin@example.com", password: "12345678", password_confirmation: "12345678", admin: true)
 #create categories for article
-categories = %w(sport culture policy technologies)
+categories = %w(sport culture policy technologies games)
 categories.each do |category|
   Category.create(name: category, description: "About #{category}")
 end
