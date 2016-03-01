@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # resources :comments, only: [:create, :update, :destroy]
 
-  # show articles of category
+  # show articles by category
   get 'category/:name', to: 'categories#show'
 
   get 'subscribe_category/:name', to: 'categories#subscribe'

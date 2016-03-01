@@ -26,4 +26,5 @@
           =' c.label category.name
           br
       p
-      = article.submit "Отправить на модерацию", class: "btn btn-primary"
+      =' article.submit "Отправить на модерацию", class: "btn btn-primary"
+      = article.submit "Предпросмотр", name: 'preview', class: "btn btn-primary"

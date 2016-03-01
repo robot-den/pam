@@ -52,11 +52,14 @@ class ArticlesController < ApplicationController
     #FIXME Is this normal?
     @article.user_id = current_user.id
     #FIXME
-    if params[:category] && @article.save
+    if params[:preview]
+      render 'preview'
+    elsif params[:category] && @article.save
       @article.assign_categories(params.require(:category))
       redirect_to article_path(@article)
     else      
       @categories = Category.all
+      #FIXME
       render new_article_path
     end
   end
