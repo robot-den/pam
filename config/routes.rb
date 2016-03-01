@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'tag/:tag', to: 'articles#show_by_tag', as: :tag
   
   get 'articles/search', to: 'articles#search'
-  resources :articles, only: [:index, :show, :new, :create, :destroy]
+  resources :articles, only: [:index, :show, :new, :create, :update, :destroy]
 
   # resources :comments, only: [:create, :update, :destroy]
 

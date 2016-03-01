@@ -14,6 +14,26 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @article = Article.find(@comment.commentable_id)
+    @comment.update_attributes(body: 'Комментарий удален. Здесь могла быть ваша реклама')
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.js { @new_comment = Comment.build_from(@article, commenter_id, "", "") }
+    end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @article = Article.find(@comment.commentable_id)
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.js { @new_comment = Comment.build_from(@article, commenter_id, "", "") }
+    end
+  end
+
   private
 
   def commenter_name

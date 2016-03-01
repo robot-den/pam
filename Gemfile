@@ -56,6 +56,8 @@ gem 'mysql2',          '~> 0.3.13'
 gem 'thinking-sphinx', '~> 3.1.0'
 # Tagging
 gem 'acts-as-taggable-on', '~> 3.4'
+# Jquery-UI
+gem 'jquery-ui-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

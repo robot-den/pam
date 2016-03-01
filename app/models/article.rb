@@ -7,9 +7,9 @@ class Article < ActiveRecord::Base
   acts_as_taggable
 
   validates :user, :header, :announce, :body, presence: true
-
-  after_update :status_notification
-  after_update :subscribers_notification
+  #FIXME Need create service layer for notification
+  # after_update :status_notification
+  # after_update :subscribers_notification
   
   #FIXME(logic and place)
   #Assign to Article categories that user checked
