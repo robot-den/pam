@@ -1,13 +1,13 @@
+# :nodoc:
 class User < ActiveRecord::Base
-
-  # Include default devise modules. Others available are: :confirmable, :lockable and :timeoutable
-  devise  :database_authenticatable, 
-          :registerable, 
-          :recoverable, 
-          :rememberable, 
-          :trackable, 
+  # Include default devise modules.
+  devise  :database_authenticatable,
+          :registerable,
+          :recoverable,
+          :rememberable,
+          :trackable,
           :validatable,
-          :async, :omniauthable, :omniauth_providers => [:facebook]
+          :async, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :articles
   has_and_belongs_to_many :categories
@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
   # # Name/email devise auth
   # attr_accessor :login
 
-  validates :name, :presence => true
-  
-  # # Name/email auth. Regular for escape name=email problems 
+  validates :name, presence: true
+
+  # # Name/email auth. Regular for escape name=email problems
   # validates_format_of :name, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   # # Overwrite devise's method for name/email login auth
@@ -31,18 +31,18 @@ class User < ActiveRecord::Base
   #   end
   # end
 
-  #Omniauth
+  # Omniauth
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.name = auth.info.name
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 
-#FIXME methods for unsubscribe link
+  # FIXME: METHODS FOR UNSUBSCRIBE LINK
   # Access token for a user
   def access_token
     User.create_access_token(self)
@@ -65,6 +65,4 @@ class User < ActiveRecord::Base
   def self.create_access_token(user)
     verifier.generate(user.id)
   end
-
-
 end

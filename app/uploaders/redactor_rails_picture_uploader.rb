@@ -1,4 +1,5 @@
-# encoding: utf-8
+# ncoding: utf-8
+# :nodoc:
 class RedactorRailsPictureUploader < CarrierWave::Uploader::Base
   include RedactorRails::Backend::CarrierWave
 
@@ -22,9 +23,9 @@ class RedactorRailsPictureUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_limit => [600, 600]
+  process resize_to_limit: [600, 600]
   # process :scale => [300, 300]
-  
+
   # def scale(width, height)
   #   :resize_to_limit => [width, height]
   # end
@@ -33,11 +34,11 @@ class RedactorRailsPictureUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_fill => [118, 100]
+    process resize_to_fill: [118, 100]
   end
 
   version :content do
-    process :resize_to_limit => [400, 400]
+    process resize_to_limit: [400, 400]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

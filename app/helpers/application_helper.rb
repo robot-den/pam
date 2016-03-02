@@ -1,6 +1,7 @@
+# :nodoc:
 module ApplicationHelper
-  #FIXME is it normal place it here?
+  # FIXME: IS IT NORMAL PLACE IT HERE?
   def take_categories
-    Category.all    
+    Category.all
   end
 end

@@ -1,23 +1,22 @@
+# Articles Controller
 class ArticlesController < ApplicationController
-
   before_action :authenticate_user!, except: [:search, :index, :show, :show_by_tag]
-
 
   def index
     @articles = Article.where(approved: true).order('created_at DESC').page_kaminari(params[:page])
   end
 
   def show
-    if params[:id] && Article.exists?(params[:id])
-      @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
+    if @article.approved
       @sub_categories, @unsub_categories = Category.user_categories(@article, current_user) if user_signed_in?
-      #FIXME current_user and default values
-      @new_comment = Comment.build_from(@article, commenter_id, "", "")
+      @new_comment = Comment.build_from(@article, commenter_id)
     else
-      redirect_to articles_path
+      redirect_to articles_url
     end
   end
-  #FIXME move it to index method
+
+  # FIXME: MOVE IT TO INDEX METHOD
   def show_by_tag
     @articles = Article.tagged_with(params[:tag]).page_kaminari(params[:page])
     render 'index'
@@ -25,20 +24,16 @@ class ArticlesController < ApplicationController
 
   def search
     if params[:search].nil? || params[:search].empty?
-      redirect_to root_path
+      redirect_to root_url
     elsif params[:search_by] == 'tags'
       @articles = Article.tagged_with(params[:search]).page_kaminari(params[:page])
       render 'index'
     elsif params[:search_by] == 'words'
-      @articles = Article.search(
-        params[:search], 
-        with: {approved: true}, 
-        page: params[:page], 
-        per_page: 6)
+      @articles = Article.search(params[:search], with: { approved: true }, page: params[:page], per_page: 6)
       @articles.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
       render 'search'
     else
-      redirect_to root_path
+      redirect_to root_url
     end
   end
 
@@ -49,22 +44,19 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    #FIXME Is this normal?
+    # FIXME: IS THIS NORMAL?
     @article.user_id = current_user.id
-    #FIXME
+    # FIXME
     if params[:preview]
       render 'preview'
     elsif params[:category] && @article.save
       @article.assign_categories(params.require(:category))
-      redirect_to article_path(@article)
-    else      
+      redirect_to articles_url
+    else
       @categories = Category.all
-      #FIXME
+      # FIXME
       render new_article_path
     end
-  end
-
-  def edit
   end
 
   def update
@@ -73,17 +65,14 @@ class ArticlesController < ApplicationController
       @article.update_attributes(approved: false)
     end
     respond_to do |format|
-      format.html { redirect_to articles_path }
+      format.html { redirect_to articles_url }
       format.js
     end
   end
 
-  def destroy
-  end
-
   private
 
-    def article_params
-      params.require(:article).permit(:header, :announce, :body, :tag_list)
-    end
+  def article_params
+    params.require(:article).permit(:header, :announce, :body, :tag_list)
+  end
 end

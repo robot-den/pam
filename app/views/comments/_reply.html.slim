@@ -3,9 +3,9 @@ ul.post-comments.comments-show
     li.comment
       .comment-wrapper
         .comment-author
-          =' comment.subject
+          =' truncate(strip_tags(comment.subject))
         p
-          = comment.body
+          = truncate(strip_tags(comment.body), length: 600)
         .comment-actions
           - if current_user.try(:admin?)
             span.admin-links
