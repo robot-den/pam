@@ -1,30 +1,28 @@
-.col-lg-12
-  .col-lg-8
-    = form_for @article do |article|
-      = article.label :header, "Заголовок"
+= form_for @article do |article|
+  = article.label :header, "Заголовок"
+  br
+  = article.text_field :header, class: "form-control"
+  p
+  = article.label :announce, "Краткое описание"
+  br
+  = article.text_area :announce, class: "form-control"
+  p
+  = article.label :tag_list, "Теги (разделенные запятой)"
+  br
+  = article.text_field :tag_list, class: "form-control"
+  p
+  = article.label :body, "Ваша статья"
+  br
+  = article.text_area  :body, class: "form-control extended-redactor"
+  p
+  /FIXME
+  = article.label :category, "Отметьте категории к которым относится статья:"
+  br
+  = fields_for :category do |c|
+    - @categories.each do |category|
+      =' c.check_box category.name, {}, true, false
+      =' c.label category.name
       br
-      = article.text_field :header, class: "form-control"
-      p
-      = article.label :announce, "Краткое описание"
-      br
-      = article.text_area :announce, class: "form-control"
-      p
-      = article.label :tag_list, "Теги (разделенные запятой)"
-      br
-      = article.text_field :tag_list, class: "form-control"
-      p
-      = article.label :body, "Ваша статья"
-      br
-      = article.text_area  :body, class: "form-control extended-redactor"
-      p
-      /FIXME
-      = article.label :category, "Отметьте категории к которым относится статья:"
-      br
-      = fields_for :category do |c|
-        - @categories.each do |category|
-          =' c.check_box category.name, {}, true, false
-          =' c.label category.name
-          br
-      p
-      =' article.submit "Отправить на модерацию", class: "btn btn-primary"
-      = article.submit "Предпросмотр", name: 'preview', class: "btn btn-primary"
+  p
+  =' article.submit "Отправить на модерацию", class: "btn btn-primary"
+  = article.submit "Предпросмотр", name: 'preview', class: "btn btn-primary"

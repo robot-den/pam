@@ -242,6 +242,9 @@ body {
   border-top: 1px dotted #828282;
   padding-top: 5px;
 }
+.blog-sidebar {
+  border: solid 2px;
+}
 .blog-sidebar h4 {
   margin-top: 20px;
   font-weight: 700;
@@ -376,4 +379,7 @@ body {
 .admin-links {
   font-weight: normal;
   font-size: 0.9em;
+}
+.panel-sidebar {
+  margin-top: 20px;
 }

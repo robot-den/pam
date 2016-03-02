@@ -87,8 +87,7 @@ Rails.application.configure do
     domain: 'google.com',
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: 'peoplearoundmail@gmail.com',
-    #FIXME
-    password: '05010501'
+    user_name: ENV['GMAIL_USERNAME'],
+    password: ENV['GMAIL_PASSWORD']
   }
 end

@@ -25,29 +25,10 @@ html
               | PeopleAroundMe
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            - take_categories.each do |category|
-              li
-                a href="/category/#{category.name}" =category.name.capitalize
-
-            /no logic for it
-            li.dropdown
-              a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-                | or more
-                span.caret
-              ul.dropdown-menu
-                - if current_user.try(:admin?)
-                  li
-                    a href="/admin"  Админка
-                li
-                  a href="#"  Category 1
-                li
-                  a href="#"  Category 2
-                li
-                  a href="#"  Category 3
-            li
-              a#toggle-search-block href="" or search
           ul.nav.navbar-nav.navbar-right
+            - if current_user.try(:admin?)
+              li
+                a href="/admin"  Админка
             - if user_signed_in?
               li
                 a href="/articles/new"  Create article
@@ -59,24 +40,47 @@ html
               li
                 = link_to "Sign_up", new_user_registration_path
 
-        /! Brand and toggle get grouped for better mobile display
-      .container-fluid#search-block
-        .navbar-header
-          .navbar-form.navbar-left role="search" 
-            .form-group
-              = form_tag('/articles/search', method: "get")
-                = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
-                = radio_button_tag :search_by, 'words', true
-                =' label_tag :search_by_words, 'by words'
-                = radio_button_tag :search_by, 'tags'
-                = label_tag :search_by_tags, 'by tags'
-                = submit_tag "Search", :name => nil, class: 'btn btn-default'
-        /! /.navbar-collapse
-      /! /.container-fluid
-      /FIXME that div's make free area =(
+    /FIXME that div's make free area =(
     / div class="notice" style=("hidden: true")
     / = notice
     / div class="alert"
     / = alert
+    row
+      - if @article || @articles
+        .col-sm-8
+          = yield
+        .col-sm-4
+          .login-panel.panel.panel-default.panel-sidebar
+            .panel-heading
+              h3.panel-title Search
+            .panel-body
+              .container-fluid
+                .navbar-header
+                  .navbar-form.navbar-left role="search" 
+                    .form-group
+                      = form_tag('/articles/search', method: "get")
+                        = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
+                        = submit_tag "Search", :name => nil, class: 'btn btn-default'
+                        br
+                        = radio_button_tag :search_by, 'words', true
+                        =' label_tag :search_by_words, 'by words'
+                        = radio_button_tag :search_by, 'tags'
+                        = label_tag :search_by_tags, 'by tags'
+            .panel-heading
+              h3.panel-title Categories
+            .panel-body
+              - take_categories.each do |category|
+                li
+                  a href="/category/#{category.name}" =' category.name.capitalize
+                  || 
+                  - if user_signed_in?
+                    - if current_user.categories.include? category
+                      a href="/subscribe_category/#{category.name}" Unsubscribe
+                    - else
+                      a href="/subscribe_category/#{category.name}" Subscribe
 
-    = yield
+      - else
+          = yield
+
+
+

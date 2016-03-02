@@ -1,24 +1,21 @@
-.row
-  .col-sm-12
-    - @articles.each do |article|
-      div class=['col-sm-8', "article-#{article.id}"]
-        .blog-post.blog-single-post
-          .single-post-title
-            h3
-              = strip_tags(article.header)
-          .single-post-content
-            = strip_tags(article.announce)
-          .single-post-info
-            i.glyphicon.glyphicon-time
-            =' article.updated_at.strftime("%d %^b, %Y")
-            i.glyphicon.glyphicon-comment
-            =' article.comment_threads.count
-            = link_to "Read", article_path(article), class: "btn btn-primary btn-sm", style: "float: right;"
-            - if current_user.try(:admin?)
-              /FIXME Why "confirm:" dont work?
-              = link_to "Удалить статью", article_path(article), method: :put, "data-confirm" => "Вы уверенены?", remote: true
+- @articles.each do |article|
+  div class=["article-#{article.id}"]
+    .blog-post.blog-single-post
+      .single-post-title
+        h3
+          = strip_tags(article.header)
+      .single-post-content
+        = strip_tags(article.announce)
+      .single-post-info
+        i.glyphicon.glyphicon-time
+        =' article.updated_at.strftime("%d %^b, %Y")
+        i.glyphicon.glyphicon-comment
+        =' article.comment_threads.count
+        = link_to "Read", article_path(article), class: "btn btn-primary btn-sm", style: "float: right;"
+        - if current_user.try(:admin?)
+          /FIXME Why "confirm:" dont work?
+          = link_to "Удалить статью", article_path(article), method: :put, "data-confirm" => "Вы уверенены?", remote: true
       /! /.col-sm-4
 .row
-  .col-sm-8
-    center
-      = paginate @articles
+  center
+    = paginate @articles

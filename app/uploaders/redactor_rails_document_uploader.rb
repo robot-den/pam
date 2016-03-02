@@ -1,4 +1,5 @@
 # encoding: utf-8
+# :nodoc:
 class RedactorRailsDocumentUploader < CarrierWave::Uploader::Base
   include RedactorRails::Backend::CarrierWave
 

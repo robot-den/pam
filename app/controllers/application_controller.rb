@@ -1,9 +1,10 @@
+# Application Controller
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  
-  # it allow save username when user sign up (also it need for name/email devise auth)
+
+  # it allow save username when user sign up (also need for name/email auth)
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_admin_user!
@@ -13,8 +14,8 @@ class ApplicationController < ActionController::Base
       redirect_to articles_path
     end
   end
-  
-  #FIXME read more about ruby methods and remake it
+
+  # FIXME: REMAKE IT
   # take current commenter id
   def commenter_id
     if user_signed_in?
@@ -23,7 +24,6 @@ class ApplicationController < ActionController::Base
       0
     end
   end
-  
 
   protected
 
@@ -34,9 +34,11 @@ class ApplicationController < ActionController::Base
 
   # # name/email devise auth
   # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation, :remember_me) }
-  #   devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :name, :email, :password, :remember_me) }
-  #   devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password) }
+  #   devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(
+  #     :name, :email, :password, :password_confirmation, :remember_me) }
+  #   devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(
+  #     :login, :name, :email, :password, :remember_me) }
+  #   devise_parameter_sanitizer.for(:account_update) { |u| u.permit(
+  #     :name, :email, :password, :password_confirmation, :current_password) }
   # end
-
 end

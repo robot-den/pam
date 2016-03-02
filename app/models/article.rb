@@ -1,5 +1,5 @@
+# :nodoc:
 class Article < ActiveRecord::Base
-
   belongs_to :user
   has_and_belongs_to_many :categories
 
@@ -7,34 +7,28 @@ class Article < ActiveRecord::Base
   acts_as_taggable
 
   validates :user, :header, :announce, :body, presence: true
-  #FIXME Need create service layer for notification
-  # after_update :status_notification
+  # FIXME: NEED CREATE SERVICE LAYER FOR NOTIFICATION
   # after_update :subscribers_notification
-  
-  #FIXME(logic and place)
-  #Assign to Article categories that user checked
+
+  # FIXME: (LOGIC AND PLACE)
+  # Assign to Article categories that user checked
   def assign_categories(categories)
-    categories.each do |key, value|
+    categories.each do |key, _value|
       if category = Category.find_by_name(key)
         self.categories << category
       end
     end
   end
 
-  private
-
-  def subscribers_notification
-    if self.approved?
-      self.categories.each do |category|
-        category.subscribers.each do |user|
-          UserMailer.subscribers_notification(self, user).deliver_later
-        end
+  # it takes all subscribers of article categories
+  def list_of_subscribers
+    list = []
+    self.categories.each do |category|
+      category.subscribers.each do |user|
+        list << user.id
       end
     end
+    list.uniq!
+    list - [self.user_id]
   end
-
-  def status_notification
-    UserMailer.status_article_notification(self).deliver_later unless self.approved.nil?
-  end
-
 end
