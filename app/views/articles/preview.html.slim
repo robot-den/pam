@@ -1,16 +1,14 @@
-.col-sm-8
-  .blog-post.blog-single-post
-    .single-post-title
-      h3
-        = strip_tags(@article.header)
-    .single-post-content
-      = sanitize(@article.body)
-    .single-post-info
-      i.glyphicon.glyphicon-time
-      =' Time.now.strftime("%d %^b, %Y | ")
-      |Tags: 
-      - @article.tag_list.each do |tag|
-        = tag
-        |  
-    = link_to 'Back to article', '', :onclick => 'history.go(-1)', class: "btn btn-primary btn-sm"
-.col-sm-4
+.blog-post.blog-single-post
+  .single-post-title
+    h3
+      = strip_tags(@article.header)
+  .single-post-content
+    = sanitize(@article.body)
+  .single-post-info
+    i.glyphicon.glyphicon-time
+    =' Time.now.strftime("%d %^b, %Y | ")
+    |Tags: 
+    - @article.tag_list.each do |tag|
+      = tag
+      |  
+  = link_to 'Back to article', '', :onclick => 'history.go(-1)', class: "btn btn-primary btn-sm"

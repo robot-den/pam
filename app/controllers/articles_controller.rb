@@ -9,7 +9,6 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     if @article.approved
-      @sub_categories, @unsub_categories = Category.user_categories(@article, current_user) if user_signed_in?
       @new_comment = Comment.build_from(@article, commenter_id)
     else
       redirect_to articles_url

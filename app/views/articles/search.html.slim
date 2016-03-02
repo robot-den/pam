@@ -1,25 +1,21 @@
+- @articles.each do |article|
+  .blog-post.blog-single-post
+    .single-post-title
+      h3
+        = sanitize(article.excerpts.header)
+    .single-post-content
+      = sanitize(article.excerpts.announce)
+    .single-post-info
+      i.glyphicon.glyphicon-time
+      =' article.updated_at.strftime("%d %^b, %Y")
+      i.glyphicon.glyphicon-comment
+      =' article.comment_threads.count
+      = link_to "Read", article_path(article), class: "btn btn-primary btn-sm", style: "float: right;"
+      - if current_user.try(:admin?)
+        /FIXME Why "confirm:" dont work?
+        = link_to "Удалить", article_path(article), method: :delete,"data-confirm" => "Вы уверенены?"
+/! /.col-sm-4
 .row
-  .col-sm-12
-    - @articles.each do |article|
-      .col-sm-8
-        .blog-post.blog-single-post
-          .single-post-title
-            h3
-              = sanitize(article.excerpts.header)
-          .single-post-content
-            = sanitize(article.excerpts.announce)
-          .single-post-info
-            i.glyphicon.glyphicon-time
-            =' article.updated_at.strftime("%d %^b, %Y")
-            i.glyphicon.glyphicon-comment
-            | 123 
-            = link_to "Read", article_path(article), class: "btn btn-primary btn-sm", style: "float: right;"
-            - if current_user.try(:admin?)
-              /FIXME Why "confirm:" dont work?
-              = link_to "Удалить", article_path(article), method: :delete,"data-confirm" => "Вы уверенены?"
-      /! /.col-sm-4
-.row
-  .col-sm-8
-    center
-      = paginate @articles
+  center
+    = paginate @articles
 

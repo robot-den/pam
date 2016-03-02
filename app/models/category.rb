@@ -13,9 +13,4 @@ class Category < ActiveRecord::Base
       user.categories << category
     end
   end
-
-  # return two relation objects: categories that user no subs. and subs.
-  def self.user_categories(article, user)
-    [article.categories - user.categories, article.categories & user.categories]
-  end
 end

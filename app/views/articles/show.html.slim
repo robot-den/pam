@@ -1,17 +1,13 @@
-.col-sm-8
-  .blog-post.blog-single-post
-    .single-post-title
-      h3
-        = strip_tags(@article.header)
-    .single-post-content
-      = sanitize(@article.body)
-    .single-post-info
-      i.glyphicon.glyphicon-time
-      =' @article.updated_at.strftime("%d %^b, %Y | ")
-      = render 'tag_list'
-    .all-comments
-      = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
-.col-sm-4
-  - if user_signed_in?
-    = render 'subscription'
+.blog-post.blog-single-post
+  .single-post-title
+    h3
+      = strip_tags(@article.header)
+  .single-post-content
+    = sanitize(@article.body)
+  .single-post-info
+    i.glyphicon.glyphicon-time
+    =' @article.updated_at.strftime("%d %^b, %Y | ")
+    = render 'tag_list'
+  .all-comments
+    = render partial: "comments/template", locals: {commentable: @article, new_comment: @new_comment}
 
