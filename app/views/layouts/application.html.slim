@@ -59,8 +59,8 @@ html
                   .navbar-form.navbar-left role="search" 
                     .form-group
                       = form_tag('/articles/search', method: "get")
-                        = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search', type: 'text'
-                        = submit_tag "Search", :name => nil, class: 'btn btn-default'
+                        = text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search disabled', type: 'text'
+                        = submit_tag "Search", :name => nil, class: 'btn btn-default', disabled: true
                         br
                         = radio_button_tag :search_by, 'words', true
                         =' label_tag :search_by_words, 'by words'
